@@ -43,6 +43,7 @@ def _run_turn(user, turn_id=None, memory_limit=None, provider_name=None, max_tok
             data = fylgja.extract_memories_with_provider(provider.name, extraction_interval)
             result = fylgja.apply_extraction(data)
             log('MEMORY', 'Extraction automatique déclenchée', turn_id=turn_id, result=result)
+            fylgja.decay_memories()
     except Exception as e:
         warn('Extraction automatique échouée', turn_id=turn_id, error=str(e))
 

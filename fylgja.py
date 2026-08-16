@@ -82,7 +82,7 @@ def search_memories(query, limit=6, candidate_limit=None):
     changed=False
     for m in memories:
         if m["id"] in ids:
-            m["last_retrieved"]=now(); m["retrieval_count"]=m.get("retrieval_count",0)+1; m["salience"]=min(2.0,m.get("salience",1.0)+0.03); changed=True
+            m["last_retrieved"]=now(); m["retrieval_count"]=m.get("retrieval_count",0)+1; m["salience"]=min(2.0,m.get("salience",1.0)+0.01); changed=True
     if changed: _save("memory/memories.json",memories)
     return result
 
@@ -99,10 +99,11 @@ def decay_memories():
     for m in memories:
         if m.get("importance")=="critical": continue
         # Frequently retrieved memories decay much more slowly.
-        if m.get("retrieval_count",0)==0: m["salience"]=max(0.25,m.get("salience",1.0)-0.01); changed+=1
-        elif m.get("retrieval_count",0)<3: m["salience"]=max(0.35,m.get("salience",1.0)-0.003); changed+=1
+        rc = m.get("retrieval_count",0)
+        if rc==0: m["salience"]=max(0.25,m.get("salience",1.0)-0.01); changed+=1
+        elif rc<3: m["salience"]=max(0.35,m.get("salience",1.0)-0.003); changed+=1
+        else: m["salience"]=max(0.45,m.get("salience",1.0)-0.001); changed+=1
     _save("memory/memories.json",memories); return changed
-
 def start_session(session_id=None):
     state=_load("state/state.json",{}); state.update({"session_id":session_id or str(uuid.uuid4()),"current_focus":None,"recent_topic":None,"interaction_mode":"normal","user_state":None,"session_started":now()}); _save("state/state.json",state); return state
 
