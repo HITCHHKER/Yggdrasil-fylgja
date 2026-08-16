@@ -1,0 +1,6 @@
+# Le projet ne dépend que de la bibliothèque standard Python (3.10+) par défaut.
+# Le provider d'embeddings Ollama fonctionne sans dépendance supplémentaire (appel HTTP direct).
+#
+# Décommenter la ligne suivante uniquement si tu choisis
+# FYLGJA_EMBEDDING_PROVIDER=sentence_transformers dans .env :
+# sentence-transformers

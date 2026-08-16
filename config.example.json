@@ -1,0 +1,36 @@
+{
+  "app": {
+    "name": "Yggdrasil + Fylgja",
+    "version": "4.1-first-test",
+    "host": "127.0.0.1",
+    "port": 8765,
+    "debug": false
+  },
+  "provider": {
+    "active": "claude",
+    "claude": {
+      "model": "claude-sonnet-5",
+      "api_key_env": "ANTHROPIC_API_KEY",
+      "base_url": "https://api.anthropic.com/v1/messages",
+      "max_tokens": 1200
+    }
+  },
+  "memory": {
+    "retrieval_limit": 6,
+    "candidate_limit": 30,
+    "semantic_weight": 0.72,
+    "lexical_weight": 0.18,
+    "importance_weight": 0.1,
+    "min_score": 0.18,
+    "auto_extract_default": false,
+    "raw_interaction_limit": 200
+  },
+  "user": {
+    "name": "l'utilisateur"
+  },
+  "embedding": {
+    "provider": "ollama",
+    "url": "http://127.0.0.1:11434/api/embeddings",
+    "model": "nomic-embed-text"
+  }
+}

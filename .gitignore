@@ -1,0 +1,14 @@
+# Secrets
+.env
+
+# Données personnelles persistantes (identité/canon exceptés : ce sont des fichiers sources statiques)
+memory/memories.json
+state/state.json
+relationship/relationship.json
+evolution/proposals.json
+data/interactions.json
+data/academic.json
+
+# Python
+__pycache__/
+*.pyc
