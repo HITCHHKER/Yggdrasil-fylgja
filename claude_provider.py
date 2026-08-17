@@ -38,7 +38,7 @@ class ClaudeProvider:
                 import academic_router
                 result = academic_router.classify(user_message)
                 from logger import log
-                log('ROUTER', f"{result['chosen_route']}", message=user_message[:60], reasons=result['reason_codes'])
+                log('ROUTER', f"{result['chosen_route']}", input_text=user_message[:60], reasons=result['reason_codes'])
                 if result['safe_for_low']:
                     return 'low'
             except ImportError:
