@@ -221,7 +221,7 @@ def extract_memories_with_provider(provider_name="claude", turn_limit=10):
 
 CRITICAL — PRESERVE EXACT DETAILS: When a specific number, name, date, or concrete detail was stated, keep it verbatim in the memory content. Do not compress "the user got 18/20 on the fractions exercise" into "the user did an exercise" or "the user mentioned struggling with a formula they'd seen before" into "the user has recurring difficulties." Vague summaries destroy the value of the memory. If the exact number/name/date is present in the conversation, it must be present in the stored memory. Prefer a slightly longer precise memory over a short vague one."""
     user = "\n\n".join(f"TURN {x['turn_id']}\nUSER: {x['user']}\nKURISU: {x['assistant']}" for x in interactions)
-    raw = get_provider(provider_name).generate(system, user, max_tokens=2500)
+    raw = get_provider(provider_name).generate(system, user, max_tokens=2500, skip_routing=True)
     raw = re.sub(r"^```(?:json)?\s*|\s*```$", "", raw.strip(), flags=re.I)
     return json.loads(raw)
 
