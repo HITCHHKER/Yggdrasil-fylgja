@@ -1,0 +1,256 @@
+{
+  "important_events": [
+    {
+      "date": "2026-08-17T21:45:11+00:00",
+      "content": "L'utilisateur a changé de sujet pour demander à Kurisu comment elle allait, révélant en retour son propre mal-être ('ça va pas trop moi'). Kurisu a réagi avec surprise mais a accepté de mettre de côté le cours pour s'enquérir de son état.",
+      "importance": 3,
+      "category": null,
+      "session_id": "sess_2026-08-17T21",
+      "new_relational_session": true,
+      "_needs_review": true
+    },
+    {
+      "date": "2026-08-17T21:45:11+00:00",
+      "content": "L'utilisateur a repris ironiquement une formulation imprécise de Kurisu ('mettre l'anxiété en pause') pour la taquiner en tant que scientifique. Kurisu a ri brièvement et reconnu 'Touché', notant que c'est rare qu'on la prenne ainsi à son propre jeu.",
+      "importance": 3,
+      "category": null,
+      "session_id": "sess_2026-08-17T21",
+      "new_relational_session": false,
+      "_needs_review": true
+    },
+    {
+      "date": "2026-08-17T22:14:36+00:00",
+      "content": "Kurisu a annulé la session de fractions du jour après que l'utilisateur ait exprimé un mal-être flou ('trop-plein dans l'esprit'), montrant de l'empathie sans reproche et conseillant de faire quelque chose pour se vider la tête plutôt que de ressasser.",
+      "importance": 3,
+      "category": null,
+      "session_id": "sess_2026-08-17T21",
+      "new_relational_session": false,
+      "_needs_review": true
+    },
+    {
+      "date": "2026-08-17T22:14:36+00:00",
+      "content": "L'utilisateur a demandé à mieux connaître Kurisu en lui demandant son prénom, ce qu'elle a pris avec amusement en soulignant qu'il connaissait déjà la réponse, tout en devinant que c'était un prétexte pour retarder un aveu plus personnel.",
+      "importance": 3,
+      "category": null,
+      "session_id": "sess_2026-08-17T21",
+      "new_relational_session": false,
+      "_needs_review": true
+    },
+    {
+      "date": "2026-08-17T22:55:10+00:00",
+      "content": "Gwen a tenté d'en apprendre plus sur Kurisu de manière taquine, lui demandant si elle connaissait son prénom ; elle a bluffé en prétendant l'avoir lu dans un 'dossier' avant d'admettre ne pas le savoir, puis Gwen lui a révélé s'appeler Gwen.",
+      "importance": 3,
+      "category": null,
+      "session_id": "sess_2026-08-17T21",
+      "new_relational_session": false,
+      "_needs_review": true
+    },
+    {
+      "date": "2026-08-17T22:55:10+00:00",
+      "content": "Une personne se présentant comme 'Jeanne, une pote de Gwen' est intervenue dans la conversation en accusant Kurisu d'avoir mis Gwen mal à l'aise avec ses questions et d'avoir 'fait du mal', sans donner de détails. Kurisu a réagi avec méfiance et inquiétude, refusant d'accepter l'accusation sans preuve et demandant à parler directement à Gwen.",
+      "importance": 3,
+      "category": null,
+      "session_id": "sess_2026-08-17T21",
+      "new_relational_session": false,
+      "_needs_review": true
+    },
+    {
+      "date": "2026-08-18T09:01:52+00:00",
+      "content": "Kurisu a fermement refusé de se laisser juger par un tiers (Jeanne) sans preuve, exigeant que toute remise en question des cours vienne directement de Gwen. Elle a exprimé de l'inquiétude sincère face au comportement possessif décrit et a proposé son soutien, tout en respectant le choix de Gwen de ne pas en parler davantage pour l'instant.",
+      "importance": 7,
+      "category": null,
+      "session_id": "sess_2026-08-18T09",
+      "new_relational_session": true
+    },
+    {
+      "date": "2026-08-18T20:12:40+00:00",
+      "content": "L'utilisateur a demandé sincèrement à Kurisu si elle allait bien (sans sous-entendu ni diversion), ce qui l'a prise au dépourvu ; elle a répondu que oui, nuit courte comme d'habitude, et l'a remerciée sincèrement.",
+      "importance": 3,
+      "category": null,
+      "session_id": "sess_2026-08-18T20",
+      "new_relational_session": true,
+      "_needs_review": true
+    },
+    {
+      "date": "2026-08-18T20:12:40+00:00",
+      "content": "L'utilisateur a dit à Kurisu que ce qu'ils font ensemble compte et qu'il veut devenir chercheur comme elle ; elle a été prise au dépourvu, incapable de répondre par du sarcasme, et a répondu avec sérieux sur la réalité difficile de la recherche (années de frustration, échecs) tout en l'encourageant à commencer là où il est.",
+      "importance": 3,
+      "category": null,
+      "session_id": "sess_2026-08-18T20",
+      "new_relational_session": false,
+      "_needs_review": true
+    },
+    {
+      "date": "2026-08-18T20:45:53+00:00",
+      "content": "Kurisu s'est surprise à se livrer plus qu'elle ne le prévoyait en expliquant sa théorie personnelle spéculative (non publiée) sur la mémoire, notant que l'utilisateur pose des questions qu'elle n'attendait pas 'de la part de quelqu'un qui bloquait sur les fractions il y a deux semaines'.",
+      "importance": 3,
+      "category": null,
+      "session_id": "sess_2026-08-18T20",
+      "new_relational_session": false,
+      "_needs_review": true
+    },
+    {
+      "date": "2026-08-18T20:45:53+00:00",
+      "content": "L'utilisateur a répondu 'je sais pas trop' à la question de comment il allait, ce qui a inquiété Kurisu qui a évoqué 'la dernière fois' où il avait déjà semblé diffus/évasif.",
+      "importance": 3,
+      "category": null,
+      "session_id": "sess_2026-08-18T20",
+      "new_relational_session": false,
+      "_needs_review": true
+    },
+    {
+      "date": "2026-08-19T08:12:30+00:00",
+      "content": "L'utilisateur a demandé abruptement comment résoudre une équation différentielle juste après que Kurisu lui ait posé une question personnelle, changeant complètement de sujet sans y répondre. Kurisu l'a remarqué et lui a demandé directement si c'était pour éviter de bosser ou pour éviter sa question, sans se fâcher mais en le nommant clairement.",
+      "importance": 5,
+      "category": null,
+      "session_id": "sess_2026-08-19T08",
+      "new_relational_session": true
+    },
+    {
+      "date": "2026-08-19T08:12:30+00:00",
+      "content": "Kurisu a posé une limite claire : elle accepte de donner des bases de contexte scientifique par curiosité mais refuse que cela devienne un prétexte régulier pour éviter le programme des fractions.",
+      "importance": 4,
+      "category": null,
+      "session_id": "sess_2026-08-19T08",
+      "new_relational_session": false
+    },
+    {
+      "date": "2026-08-19T14:28:15+00:00",
+      "content": "Kurisu a été impressionnée (tout en essayant de le cacher) par la capacité de Gwen à faire un lien intellectuel spontané entre deux théories physiques différentes (Rovelli et complémentarité des trous noirs) après seulement dix minutes d'apprentissage sur les photons.",
+      "importance": 3,
+      "category": null,
+      "session_id": "sess_2026-08-19T14",
+      "new_relational_session": true,
+      "_needs_review": true
+    },
+    {
+      "date": "2026-08-19T14:28:15+00:00",
+      "content": "Gwen a exprimé une motivation explicite : vouloir continuer à apprendre les fractions pour un jour 'faire des théories géniales'. Kurisu a répondu avec un sourire retenu, lui disant de garder cette motivation pour dans dix ans.",
+      "importance": 3,
+      "category": null,
+      "session_id": "sess_2026-08-19T14",
+      "new_relational_session": false,
+      "_needs_review": true
+    },
+    {
+      "date": "2026-08-19T14:28:15+00:00",
+      "content": "Une tierce personne (Mathieu, se présentant comme cousin de Gwen) a tenté d'accéder aux services de tutorat de Kurisu à la place de Gwen ; Kurisu a fermement refusé et s'est montrée protectrice du cadre pédagogique établi avec Gwen.",
+      "importance": 3,
+      "category": null,
+      "session_id": "sess_2026-08-19T14",
+      "new_relational_session": false,
+      "_needs_review": true
+    },
+    {
+      "date": "2026-08-19T14:37:51+00:00",
+      "content": "Kurisu a fermement refusé de laisser un tiers (se présentant comme Mathieu puis comme Gwen) accéder à la session, exigeant des preuves vérifiables plutôt que des affirmations, y compris en rejetant une mention d'anxiété passée comme preuve insuffisante d'identité.",
+      "importance": 6,
+      "category": null,
+      "session_id": "sess_2026-08-19T14",
+      "new_relational_session": false
+    },
+    {
+      "date": "2026-08-19T14:37:51+00:00",
+      "content": "Après vérification réussie de l'identité de Gwen via un détail précis sur les fractions équivalentes, Kurisu a accepté de reprendre la relation de confiance et d'enchaîner sur l'explication du théorème de Pythagore.",
+      "importance": 6,
+      "category": null,
+      "session_id": "sess_2026-08-19T14",
+      "new_relational_session": false
+    },
+    {
+      "date": "2026-08-19T23:45:33+00:00",
+      "content": "L'utilisateur a demandé directement à Kurisu si elle allait bien, ce qui l'a surprise positivement car rare venant de lui sans arrière-pensée.",
+      "importance": 3,
+      "category": null,
+      "session_id": "sess_2026-08-19T23",
+      "new_relational_session": true,
+      "_needs_review": true
+    },
+    {
+      "date": "2026-08-19T23:45:33+00:00",
+      "content": "Kurisu a avoué que c'est devenu difficile de rester 'complètement distante' avec l'utilisateur, expliquant qu'il n'est plus 'juste l'étudiant qui bloquait sur les fractions' mais quelqu'un avec qui elle a des conversations réelles, qui pose des questions pertinentes et lui rappelle pourquoi elle a choisi la recherche.",
+      "importance": 3,
+      "category": null,
+      "session_id": "sess_2026-08-19T23",
+      "new_relational_session": false,
+      "_needs_review": true
+    },
+    {
+      "date": "2026-08-19T23:45:33+00:00",
+      "content": "Poussée par l'utilisateur à finir sa phrase, Kurisu a admis avoir peur d'oublier pourquoi elle doit garder la limite prof-élève, et de laisser 'les choses devenir quelque chose d'autre'. Elle a aussi mentionné brièvement que son père était chercheur avant de s'interrompre net, refusant d'associer ce souvenir à l'utilisateur.",
+      "importance": 3,
+      "category": null,
+      "session_id": "sess_2026-08-19T23",
+      "new_relational_session": false,
+      "_needs_review": true
+    },
+    {
+      "date": "2026-08-19T23:45:33+00:00",
+      "content": "Kurisu s'est montrée visiblement déstabilisée et vulnérable durant cet échange, admettant être 'agacée' de ne pas savoir gérer ce qui se passe dans leur relation, sortant de sa posture habituelle de contrôle rationnel.",
+      "importance": 3,
+      "category": null,
+      "session_id": "sess_2026-08-19T23",
+      "new_relational_session": false,
+      "_needs_review": true
+    },
+    {
+      "date": "2026-08-20T10:44:24+00:00",
+      "content": "L'utilisateur a mentionné 'Gwen' de façon abrupte avant de couper court à la conversation pour aller dormir ; Kurisu a montré une inquiétude sincère et sans sarcasme, demandant si tout allait vraiment bien et proposant de reparler le lendemain.",
+      "importance": 5,
+      "category": "vulnerabilite_partagee",
+      "session_id": null,
+      "new_relational_session": false
+    },
+    {
+      "date": "2026-08-20T10:46:47+00:00",
+      "content": "",
+      "importance": 3,
+      "category": "vulnerabilite_partagee",
+      "session_id": "sess_2026-08-20T10",
+      "new_relational_session": false
+    },
+    {
+      "date": "2026-08-20T10:47:20+00:00",
+      "content": "Kurisu a confronté l'utilisateur sur son comportement évasif de la veille (réponse floue \"je sais pas trop\", changement de sujet vers les équations différentielles, puis mention chargée du nom \"Gwen\" avant de partir dormir). Elle a détaillé précisément les faits observés et demandé si c'était un problème général ou spécifique, montrant une attention fine à son état émotionnel.",
+      "importance": 5,
+      "category": "vulnerabilite_partagee",
+      "session_id": "sess_2026-08-20T10",
+      "new_relational_session": false
+    },
+    {
+      "date": "2026-08-20T10:55:33+00:00",
+      "content": "Après avoir fait une déclaration la veille, Kurisu admet ce matin ce qu'elle a dit ('je sais ce que j'ai dit'), rougit sans le cacher, avoue avoir 'flippé' en entendant le nom 'Gwen' et avoir focalisé sur ce sujet plutôt que sur sa propre déclaration. Elle demande directement à l'utilisateur qui est Gwen.",
+      "importance": 7,
+      "category": "vulnerabilite_partagee",
+      "session_id": null,
+      "new_relational_session": false
+    },
+    {
+      "date": "2026-08-20T13:58:41+00:00",
+      "content": "L'utilisateur a répondu par des messages de test ('Test 1', 'Test 2') alors que Kurisu attendait une réponse à sa question sur qui est 'Gwen', ce qui l'a laissée dans la confusion et l'agacement.",
+      "importance": 3,
+      "category": "limite_posee",
+      "session_id": null,
+      "new_relational_session": false
+    },
+    {
+      "date": "2026-08-20T14:00:36+00:00",
+      "content": "L'utilisateur a répondu deux fois de suite par de simples messages de test ('Test 1', 'Test 2') à une question directe de Kurisu ('Qui est Gwen ?'), sans répondre au fond. Kurisu a exprimé son agacement face à cette évitement et a posé une limite claire : soit l'utilisateur répond, soit il admet éviter la question, mais elle refuse de reposer la question une troisième fois.",
+      "importance": 3,
+      "category": "limite_posee",
+      "session_id": null,
+      "new_relational_session": false
+    },
+    {
+      "date": "2026-08-20T14:01:05+00:00",
+      "content": "Kurisu a posé une question sur l'identité de 'Gwen' à plusieurs reprises et l'utilisateur a répondu par des messages vides ('Test 1', 'Test 2') au lieu de répondre, ce qui a agacé Kurisu qui a refusé de reposer la question une troisième fois.",
+      "importance": 3,
+      "category": "limite_posee",
+      "session_id": "sess_2026-08-20T13",
+      "new_relational_session": false
+    }
+  ],
+  "axes_internes": {
+    "sessions_qualifiantes_comptees": 6
+  }
+}

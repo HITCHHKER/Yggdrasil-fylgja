@@ -26,7 +26,7 @@
   "memory": {
     "retrieval_limit": 6,
     "candidate_limit": 30,
-    "auto_extract_every_n_turns": 2,
+    "auto_extract_every_n_turns": 8,
     "semantic_weight": 0.72,
     "lexical_weight": 0.18,
     "importance_weight": 0.1,
@@ -35,12 +35,7 @@
     "raw_interaction_limit": 200
   },
   "user": {
-    "name": "Gwen"
-  },
-  "relationship": {
-    "distinct_session_gap_hours": 4,
-    "distinct_session_min_turns": 2,
-    "positive_sessions_to_deescalate": 2
+    "name": "l'utilisateur"
   },
   "embedding": {
     "provider": "ollama",

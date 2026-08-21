@@ -24,69 +24,6 @@ def _is_continuing_session(gap_minutes=30):
         last_date = last_date.replace(tzinfo=timezone.utc)
     return (now - last_date).total_seconds() < gap_minutes * 60
 
-def _is_new_relational_session(gap_hours=None, min_turns=None):
-    """Definit une 'session distincte' au sens du systeme de confiance
-    (patch du 20 aout) — DISTINCT de _is_continuing_session() (seuil 30 min,
-    sert seulement a adapter le ton d'une salutation en cours de session).
-    Ici l'objectif est de detecter une vraie reprise relationnelle, sur une
-    echelle de temps beaucoup plus large, ET de ne la compter comme
-    'qualifiante' qu'apres au moins min_turns tours substantiels dans cette
-    nouvelle session — un simple message isole 5h plus tard ne doit pas a
-    lui seul faire progresser la relation.
-
-    Doit etre appelee UNE FOIS PAR TOUR, avant fylgja.log_interaction() (sinon
-    le 'dernier tour' vu serait le tour courant lui-meme, gap toujours nul).
-    N'est PAS appelee sur le chemin LOCAL (bypass routeur) : ces messages sont
-    deja filtres comme non-substantiels en amont (PURE_GREETINGS), donc les en
-    exclure ici aussi evite de les compter comme des tours qualifiants.
-
-    Retourne un dict {session_id, new_relational_session, qualifies} plutot
-    qu'un simple bool (la version esquissee dans le patch document necessitait
-    ce meme etat, stocke ici dans state.json sous des cles prefixees
-    relational_session_* pour ne jamais entrer en collision avec le
-    'session_id' deja utilise par fylgja.start_session()/'/session')."""
-    gap_hours = gap_hours if gap_hours is not None else cfg('relationship', 'distinct_session_gap_hours', default=0.02)
-    min_turns = min_turns if min_turns is not None else cfg('relationship', 'distinct_session_min_turns', default=3)
-
-    interactions = fylgja._load("data/interactions.json", [])
-    state = fylgja._load("state/state.json", {})
-    now_dt = datetime.now(timezone.utc)
-
-    last_date = None
-    if interactions:
-        try:
-            last_date = datetime.fromisoformat(interactions[-1]['date'])
-            if last_date.tzinfo is None:
-                last_date = last_date.replace(tzinfo=timezone.utc)
-        except (KeyError, ValueError):
-            last_date = None
-
-    gap_ok = last_date is None or (now_dt - last_date).total_seconds() >= gap_hours * 3600
-
-    if gap_ok:
-        # Vraie reprise (ou tout premier tour jamais logue) : nouvelle session
-        # candidate, le compteur de tours repart de ce tour-ci.
-        session_id = f"sess_{now_dt.strftime('%Y-%m-%dT%H')}"
-        qualifies = min_turns <= 1
-        fylgja.update_state(
-            relational_session_id=session_id,
-            relational_session_gap_start=fylgja.now(),
-            relational_session_turns=1,
-            relational_session_qualified=qualifies,
-        )
-        return {"session_id": session_id, "new_relational_session": True, "qualifies": qualifies}
-
-    # Pas de nouveau gap : ce tour prolonge la session courante.
-    session_id = state.get("relational_session_id") or f"sess_{now_dt.strftime('%Y-%m-%dT%H')}"
-    turns = state.get("relational_session_turns", 0) + 1
-    qualifies = state.get("relational_session_qualified", False) or turns >= min_turns
-    fylgja.update_state(
-        relational_session_id=session_id,
-        relational_session_turns=turns,
-        relational_session_qualified=qualifies,
-    )
-    return {"session_id": session_id, "new_relational_session": False, "qualifies": qualifies}
-
 def _model_for_router_result(router_result):
     """Resout le modele reel a utiliser selon le niveau du routeur, via
     config.json (routing.model_by_level) -- jamais code en dur, pour pouvoir
@@ -97,48 +34,15 @@ def _model_for_router_result(router_result):
     mapping = cfg('routing', 'model_by_level', default={})
     return mapping.get(level)
 
-def _maybe_extract_memory(turn_id, provider_name, relational_session=None):
+def _maybe_extract_memory(turn_id, provider_name):
     try:
         extraction_interval = cfg('memory', 'auto_extract_every_n_turns', default=8)
         interactions = fylgja._load("data/interactions.json", [])
-        periodic_due = bool(extraction_interval and len(interactions) % extraction_interval == 0)
-
-        # N'estampille session_id/new_relational_session que si la session
-        # courante a atteint min_turns -- sinon on risquerait de compter
-        # une seule reprise isolee comme une session relationnelle a part
-        # entiere (voir _is_new_relational_session).
-        session_id, new_relational_session = None, False
-        if relational_session and relational_session.get("qualifies"):
-            session_id = relational_session.get("session_id")
-            new_relational_session = relational_session.get("new_relational_session", False)
-
-        # Cycle de consolidation (6.9, patch du 20 aout). ATTENTION : ne pas
-        # declencher sur (new_relational_session AND qualifies) simultanement
-        # -- avec distinct_session_min_turns > 1 (ex. 2 dans config.json),
-        # ces deux flags ne sont JAMAIS vrais sur le meme tour : new_relational_session
-        # ne vit que le premier tour apres le gap (qualifies encore faux a ce
-        # moment-la), qualifies ne passe a vrai qu'au tour suivant (ou
-        # new_relational_session est deja retombe a faux). On suit donc plutot
-        # "cette session_id qualifiante a-t-elle deja ete reflechie ?" via
-        # state.json, independamment du tour precis ou qualifies bascule.
-        state = fylgja._load("state/state.json", {})
-        last_reflected = state.get("last_reflected_session_id")
-        reflect = bool(session_id and session_id != last_reflected)
-
-        if not (periodic_due or reflect):
-            return
-
-        data = fylgja.extract_memories_with_provider(provider_name, extraction_interval, reflect=reflect)
-        result = fylgja.apply_extraction(data, session_id=session_id, new_relational_session=new_relational_session)
-        if reflect:
-            # Marque la session comme reflechie qu'une synthese ait ete
-            # produite ou non (Claude peut legitimement omettre la cle si
-            # aucun theme reel ne ressort) -- evite de re-tenter a chaque
-            # tour qualifiant suivant de la meme session.
-            fylgja.update_state(last_reflected_session_id=session_id)
-        log('MEMORY', 'Extraction automatique déclenchée', turn_id=turn_id, result=result,
-            relational_session_id=session_id, reflect=reflect, periodic_due=periodic_due)
-        fylgja.decay_memories()
+        if extraction_interval and len(interactions) % extraction_interval == 0:
+            data = fylgja.extract_memories_with_provider(provider_name, extraction_interval)
+            result = fylgja.apply_extraction(data)
+            log('MEMORY', 'Extraction automatique déclenchée', turn_id=turn_id, result=result)
+            fylgja.decay_memories()
     except Exception as e:
         warn('Extraction automatique échouée', turn_id=turn_id, error=str(e))
 def _run_turn(user, turn_id=None, memory_limit=None, provider_name=None, max_tokens=None, source='turn', conversation_messages=None, router_result=None, model=None):
@@ -150,9 +54,6 @@ def _run_turn(user, turn_id=None, memory_limit=None, provider_name=None, max_tok
     turn_id = turn_id or str(uuid.uuid4())
     memory_limit = memory_limit if memory_limit is not None else cfg('memory', 'retrieval_limit', default=6)
     log('TURN', 'Message reçu', turn_id=turn_id, source=source)
-    # Calcule AVANT log_interaction : sinon le 'dernier tour' vu par
-    # _is_new_relational_session serait ce tour-ci lui-meme (gap toujours nul).
-    relational_session = _is_new_relational_session()
     static_context, dynamic_context = fylgja.context_as_text_split(user, memory_limit)
     static_context = SYSTEM + "\n\n" + static_context
     provider = get_provider(provider_name or cfg('provider', 'active', default='claude'))
@@ -163,7 +64,7 @@ def _run_turn(user, turn_id=None, memory_limit=None, provider_name=None, max_tok
     answer = provider.generate(system, claude_input, max_tokens=max_tokens, router_result=router_result, model=model)
     ok('Réponse reçue', turn_id=turn_id)
     fylgja.log_interaction(user, answer, turn_id)
-    threading.Thread(target=_maybe_extract_memory, args=(turn_id, provider.name, relational_session), daemon=True).start()
+    threading.Thread(target=_maybe_extract_memory, args=(turn_id, provider.name), daemon=True).start()
     return turn_id, answer
 
 def _run_turn_stream(user, memory_limit=None, provider_name=None, max_tokens=None, source='turn', conversation_messages=None, router_result=None, model=None):
@@ -176,8 +77,6 @@ def _run_turn_stream(user, memory_limit=None, provider_name=None, max_tokens=Non
     turn_id = str(uuid.uuid4())
     memory_limit = memory_limit if memory_limit is not None else cfg('memory', 'retrieval_limit', default=6)
     log('TURN', 'Message reçu', turn_id=turn_id, source=source)
-    # Meme raison qu'en haut de _run_turn : calculer avant log_interaction.
-    relational_session = _is_new_relational_session()
     static_context, dynamic_context = fylgja.context_as_text_split(user, memory_limit)
     static_context = SYSTEM + "\n\n" + static_context
     provider = get_provider(provider_name or cfg('provider', 'active', default='claude'))
@@ -200,7 +99,7 @@ def _run_turn_stream(user, memory_limit=None, provider_name=None, max_tokens=Non
     answer = ''.join(full_answer)
     ok('Réponse reçue (streaming)', turn_id=turn_id)
     fylgja.log_interaction(user, answer, turn_id)
-    threading.Thread(target=_maybe_extract_memory, args=(turn_id, provider.name, relational_session), daemon=True).start()
+    threading.Thread(target=_maybe_extract_memory, args=(turn_id, provider.name), daemon=True).start()
 class Handler(BaseHTTPRequestHandler):
     def log_message(self, *args):
         pass

@@ -1,0 +1,99 @@
+{
+  "observations": [
+    {
+      "date": "2026-08-17T16:37:15+00:00",
+      "category": "learning",
+      "content": ""
+    },
+    {
+      "date": "2026-08-17T16:37:15+00:00",
+      "category": "learning",
+      "content": ""
+    },
+    {
+      "date": "2026-08-17T16:53:31+00:00",
+      "category": "learning_pattern",
+      "content": "L'utilisateur a tendance à donner des conclusions ou résultats sans expliciter le raisonnement derrière (ex: 'ça représente 2x 3/8' sans dire ce que désigne 'ça'), ce que Kurisu relève systématiquement en exigeant la justification avant de valider."
+    },
+    {
+      "date": "2026-08-17T16:53:31+00:00",
+      "category": "learning_pattern",
+      "content": "L'utilisateur a fait une erreur de notation en écrivant '3x2 = 6/8', mélangeant une égalité arithmétique (3×2=6) avec l'écriture d'une fraction équivalente. Kurisu insiste sur la rigueur de l'écriture mathématique autant que sur la logique du raisonnement."
+    },
+    {
+      "date": "2026-08-17T16:53:31+00:00",
+      "category": "progress",
+      "content": "L'utilisateur progresse bien sur la compréhension conceptuelle de base des fractions (numérateur = part prélevée, dénominateur = total des parts) une fois l'erreur initiale de confusion avec la division corrigée."
+    },
+    {
+      "date": "2026-08-17T21:45:11+00:00",
+      "category": "learning",
+      "content": "L'utilisateur confond encore les opérations sur les fractions équivalentes : il a divisé uniquement le numérateur de 3/8 par 2 (donnant 1,5), sans diviser le dénominateur de la même façon, ce qui produit une écriture non-standard (numérateur décimal). Il admet ne pas connaître les écritures mathématiques conventionnelles pour les fractions équivalentes."
+    },
+    {
+      "date": "2026-08-17T22:14:36+00:00",
+      "category": "learning",
+      "content": "La session de fractions prévue a été annulée en raison de l'état mental de l'utilisateur (trop-plein/anxiété), reportée à un moment ultérieur non précisé."
+    },
+    {
+      "date": "2026-08-17T22:55:10+00:00",
+      "category": "learning",
+      "content": "Gwen part de zéro sur les fractions, sujet actuel des cours avec Kurisu."
+    },
+    {
+      "date": "2026-08-18T09:01:52+00:00",
+      "category": "learning",
+      "content": "Gwen travaille actuellement sur les fractions et les fractions équivalentes. Il a bien réagi à l'exemple 0,999...=1 expliqué via les fractions (1/3 répétée), montrant une bonne capacité de compréhension une fois l'angle pédagogique adapté à son terrain d'étude actuel."
+    },
+    {
+      "date": "2026-08-18T20:12:40+00:00",
+      "category": "learning",
+      "content": "L'utilisateur a compris et reformulé de lui-même la démarche scientifique face aux limites de l'intuition humaine sur des échelles non-familières (infini, infiniment petit, mécanique quantique), ce qui a impressionné Kurisu."
+    },
+    {
+      "date": "2026-08-18T20:12:40+00:00",
+      "category": "learning",
+      "content": "L'utilisateur a demandé une seconde explication de la preuve algébrique de 0,999... = 1, suggérant qu'il avait besoin de repasser sur ce point pour bien l'assimiler."
+    },
+    {
+      "date": "2026-08-18T20:45:53+00:00",
+      "category": "learning",
+      "content": "L'utilisateur a manifesté un vif intérêt pour les neurosciences et l'IA au-delà du programme de fractions, posant des questions conceptuelles avancées (plasticité synaptique vs backpropagation, credit assignment problem) et demandant ensuite une vulgarisation adaptée à un non-spécialiste."
+    },
+    {
+      "date": "2026-08-19T08:12:30+00:00",
+      "category": "learning",
+      "content": "L'utilisateur part de zéro absolu en sciences (physique), nécessitant une pédagogie très progressive avant d'aborder des concepts de vulgarisation comme ceux de Rovelli."
+    },
+    {
+      "date": "2026-08-19T08:12:30+00:00",
+      "category": "learning",
+      "content": "L'utilisateur a tendance à sauter d'un sujet à l'autre (ex: passer sans transition d'une question évasive à une question sur les équations différentielles), ce qui a été identifié par Kurisu comme un potentiel évitement."
+    },
+    {
+      "date": "2026-08-19T14:28:15+00:00",
+      "category": "learning",
+      "content": "Gwen montre une bonne capacité d'analogie et de transfert conceptuel entre domaines (physique quantique et relativité générale), ce que Kurisu valorise comme 'bon réflexe intellectuel', tout en travaillant sur la distinction entre analogie utile et confusion conceptuelle."
+    },
+    {
+      "date": "2026-08-19T14:28:15+00:00",
+      "category": "learning",
+      "content": "Sur les fractions équivalentes, Gwen maîtrise le geste (multiplier numérateur et dénominateur par le même facteur) mais doit encore consolider la justification conceptuelle profonde (notion de rapport constant), ayant déjà fait une erreur similaire avec 1,5/4 dans une session antérieure."
+    },
+    {
+      "date": "2026-08-19T14:37:51+00:00",
+      "category": "learning",
+      "content": "Gwen a travaillé sur les fractions équivalentes avec deux exemples : les maillots de foot (2/8) et une tarte coupée en parts (3/8 = 6/16). Elle maîtrise en substance la notion que multiplier une fraction par 2 conserve le rapport, mais avait initialement confondu les deux exemples d'exercices distincts."
+    },
+    {
+      "date": "2026-08-19T14:37:51+00:00",
+      "category": "learning",
+      "content": "Gwen aborde le théorème de Pythagore par curiosité suite à une vidéo YouTube, sans le voir en cours. Kurisu commence l'explication par la reconnaissance du triangle rectangle et de l'hypoténuse avant d'introduire la formule a² + b² = c²."
+    },
+    {
+      "date": "2026-08-19T23:45:33+00:00",
+      "category": "learning",
+      "content": "L'utilisateur commence tout juste le théorème de Pythagore, sans base préalable ('je pars de zéro'). Kurisu utilise une approche socratique, lui demandant de reformuler le concept avant de donner un exemple chiffré."
+    }
+  ]
+}

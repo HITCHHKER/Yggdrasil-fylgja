@@ -17,33 +17,27 @@ class ClaudeProvider:
     def _build_system(self, system):
         if isinstance(system, tuple):
             static_text, dynamic_text = system
-            blocks = [{'type': 'text', 'text': static_text, 'cache_control': {'type': 'ephemeral'}}]
+            blocks = [{'type': 'text', 'text': static_text, 'cache_control': {'type': 'ephemeral', 'ttl': '1h'}}]
             if dynamic_text:
                 blocks.append({'type': 'text', 'text': dynamic_text})
             return blocks
         return system or None
-    def _effort(self, user_message=None):
-        """Sonnet 5 a la réflexion adaptative activée par défaut à effort 'high' —
-        chaque requête déclenche un vrai bloc de raisonnement interne AVANT le
-        premier mot visible, même en streaming. Pour du chat conversationnel,
-        'medium' réduit fortement ce délai sans casser la cohérence de personnage.
-
-        Si le routing académique est activé (config) et qu'un message est
-        fourni, on utilise le classifieur V1 (academic_router.py) pour décider
-        si 'low' est sûr, sinon on retombe sur le réglage fixe de config.json."""
+    def _effort(self, user_message=None, router_result=None):
+        """router_result vient d'un appel UNIQUE à get_router().classify() fait en
+        amont dans server.py : on ne reclassifie jamais ici, pour ne pas fausser
+        les compteurs de calibration (sinon incrémentés deux fois par tour).
+        LOW est traité comme MEDIUM côté effort réel : le cache Anthropic est
+        indexé sur output_config.effort, donc changer d'effort à chaque tour
+        casse le cache. Seul HIGH justifie de le casser."""
         default_effort = cfg('provider', 'claude', 'effort', default='medium')
         routing_enabled = cfg('routing', 'enabled', default=False)
-        if routing_enabled and user_message:
-            try:
-                import academic_router
-                result = academic_router.classify(user_message)
-                from logger import log
-                log('ROUTER', f"{result['chosen_route']}", input_text=user_message[:60], reasons=result['reason_codes'])
-                if result['safe_for_low']:
-                    return 'low'
-            except ImportError:
-                pass
+        if routing_enabled and router_result:
+            from logger import log
+            log('ROUTER', router_result['level'], input_text=(user_message or '')[:60], reason=router_result['reason'])
+            if router_result['level'] == 'HIGH':
+                return 'high'
         return default_effort
+
     def _build_messages(self, user):
         """Accepte soit une simple chaine (comportement d'origine, un seul
         message utilisateur), soit une liste de dicts {role, content} deja
@@ -64,21 +58,28 @@ class ClaudeProvider:
             return ''
         return user
 
-    def generate(self, system, user, max_tokens=1200, skip_routing=False):
-        model = os.getenv('FYLGJA_CLAUDE_MODEL', cfg('provider', 'claude', 'model', default=DEFAULT_MODEL))
+    def _supports_effort(self, model):
+        """Haiku 4.5 ne supporte pas output_config.effort (reflexion adaptative
+        reservee aux modeles Sonnet/Opus/Fable) -- l'envoyer declenche une
+        erreur HTTP 400. On construit le payload conditionnellement selon
+        le modele cible."""
+        return 'haiku' not in (model or '').lower()
+    def generate(self, system, user, max_tokens=1200, skip_routing=False, router_result=None, model=None):
+        model = model or os.getenv('FYLGJA_CLAUDE_MODEL', cfg('provider', 'claude', 'model', default=DEFAULT_MODEL))
         url = os.getenv('FYLGJA_CLAUDE_URL', cfg('provider', 'claude', 'base_url', default=DEFAULT_URL))
         payload = {
             'model': model,
             'max_tokens': max_tokens,
             'system': self._build_system(system),
             'messages': self._build_messages(user),
-            'output_config': {'effort': self._effort(None if skip_routing else self._last_user_text(user))},
         }
+        if self._supports_effort(model):
+            payload['output_config'] = {'effort': self._effort(None if skip_routing else self._last_user_text(user), router_result=router_result)}
         req = urllib.request.Request(url, data=json.dumps(payload, ensure_ascii=False).encode(), headers={
             'Content-Type': 'application/json',
             'x-api-key': self._key(),
             'anthropic-version': '2023-06-01',
-            'anthropic-beta': 'prompt-caching-2024-07-31',
+            'anthropic-beta': 'extended-cache-ttl-2025-04-11',
         }, method='POST')
         try:
             with urllib.request.urlopen(req, timeout=90) as r:
@@ -99,22 +100,23 @@ class ClaudeProvider:
             log('CACHE', 'Prompt caching actif', read_tokens=cache_read, write_tokens=cache_write)
         return '\n'.join(texts).strip()
 
-    def generate_stream(self, system, user, max_tokens=1200, skip_routing=False):
-        model = os.getenv('FYLGJA_CLAUDE_MODEL', cfg('provider', 'claude', 'model', default=DEFAULT_MODEL))
+    def generate_stream(self, system, user, max_tokens=1200, skip_routing=False, router_result=None, model=None):
+        model = model or os.getenv('FYLGJA_CLAUDE_MODEL', cfg('provider', 'claude', 'model', default=DEFAULT_MODEL))
         url = os.getenv('FYLGJA_CLAUDE_URL', cfg('provider', 'claude', 'base_url', default=DEFAULT_URL))
         payload = {
             'model': model,
             'max_tokens': max_tokens,
             'system': self._build_system(system),
             'messages': self._build_messages(user),
-            'output_config': {'effort': self._effort(None if skip_routing else self._last_user_text(user))},
             'stream': True,
         }
+        if self._supports_effort(model):
+            payload['output_config'] = {'effort': self._effort(None if skip_routing else self._last_user_text(user), router_result=router_result)}
         req = urllib.request.Request(url, data=json.dumps(payload, ensure_ascii=False).encode(), headers={
             'Content-Type': 'application/json',
             'x-api-key': self._key(),
             'anthropic-version': '2023-06-01',
-            'anthropic-beta': 'prompt-caching-2024-07-31',
+            'anthropic-beta': 'extended-cache-ttl-2025-04-11',
         }, method='POST')
         try:
             with urllib.request.urlopen(req, timeout=90) as r:
@@ -129,6 +131,13 @@ class ClaudeProvider:
                         event = json.loads(data_str)
                     except json.JSONDecodeError:
                         continue
+                    if event.get('type') == 'message_start':
+                        usage = event.get('message', {}).get('usage', {})
+                        cache_read = usage.get('cache_read_input_tokens', 0)
+                        cache_write = usage.get('cache_creation_input_tokens', 0)
+                        if cache_read or cache_write:
+                            from logger import log
+                            log('CACHE', 'Prompt caching actif (stream)', read_tokens=cache_read, write_tokens=cache_write)
                     if event.get('type') == 'content_block_delta':
                         delta = event.get('delta', {})
                         if delta.get('type') == 'text_delta':

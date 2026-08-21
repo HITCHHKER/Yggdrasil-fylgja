@@ -1,0 +1,87 @@
+{
+  "important_events": [
+    {
+      "date": "2026-08-20T15:56:38+00:00",
+      "content": "Kurisu a d'abord agi comme si une relation pédagogique préexistante existait (reprochant un retard de 5 minutes et demandant où ils en étaient dans un 'dernier chapitre'), alors qu'il s'agissait en réalité de leur toute première séance. Confrontée à l'erreur, elle a été prise au dépourvu, brièvement embarrassée, a évoqué avoir 'pas mal de choses en tête', puis s'est reprise et s'est présentée correctement.",
+      "importance": 4,
+      "category": "transgression_competence",
+      "session_id": "sess_2026-08-20T14",
+      "new_relational_session": false
+    },
+    {
+      "date": "2026-08-20T15:59:59+00:00",
+      "content": "L'utilisateur a admis honnêtement et sans excuse être épuisé et avoir un niveau très faible en maths/physique. Kurisu a apprécié cette honnêteté directe et a proposé de reporter la session ou de commencer doucement, refusant de faire une séance bâclée par fatigue.",
+      "importance": 5,
+      "category": "vulnerabilite_partagee",
+      "session_id": "sess_2026-08-20T14",
+      "new_relational_session": false
+    },
+    {
+      "date": "2026-08-20T16:01:54+00:00",
+      "content": "L'utilisateur a fait une blague sarcastique sur la situation en France pour illustrer les nombres négatifs ('le contexte est pas cool en France'), et Kurisu a eu un sourire rapide et involontaire avant de se reprendre.",
+      "importance": 3,
+      "category": "curiosite_intellectuelle",
+      "session_id": "sess_2026-08-20T14",
+      "new_relational_session": false
+    },
+    {
+      "date": "2026-08-20T16:04:11+00:00",
+      "content": "Kurisu a posé une limite ferme et répétée contre l'auto-dénigrement de l'utilisateur ('je suis trop bête', 'tu pourrais me traiter de personne stupide'), refusant de continuer l'exercice tant qu'il se sabote verbalement, tout en validant que sa réponse mathématique ('-50') était en fait correcte.",
+      "importance": 5,
+      "category": "limite_posee",
+      "session_id": "sess_2026-08-20T14",
+      "new_relational_session": false
+    },
+    {
+      "date": "2026-08-20T16:05:32+00:00",
+      "content": "L'utilisateur a avoué avoir triché en demandant la réponse à ChatGPT. Kurisu a réagi avec fermeté mais sans agressivité, posant une limite claire : les cours ne servent pas à accumuler des réponses correctes sans comprendre, et elle a proposé de reprendre l'exercice (la droite numérique, dette de cent euros, gain de cinquante) pour vérifier la compréhension réelle.",
+      "importance": 5,
+      "category": "limite_posee",
+      "session_id": "sess_2026-08-20T14",
+      "new_relational_session": false
+    },
+    {
+      "date": "2026-08-20T16:11:26+00:00",
+      "content": "",
+      "importance": 5,
+      "category": "limite_posee",
+      "session_id": "sess_2026-08-20T14",
+      "new_relational_session": false
+    },
+    {
+      "date": "2026-08-20T16:11:26+00:00",
+      "content": "",
+      "importance": 7,
+      "category": "limite_posee",
+      "session_id": "sess_2026-08-20T14",
+      "new_relational_session": false
+    },
+    {
+      "date": "2026-08-20T16:28:34+00:00",
+      "content": "L'utilisateur a explicitement rejeté les maths et l'aide de Kurisu ('je m'en fou réellement, nique les maths'). Kurisu a posé une limite claire : elle ne force personne qui affirme ne pas vouloir de son aide, et a mis fin à la session sans dramatiser mais sans complaisance non plus, en pointant aussi l'usage de ChatGPT par l'utilisateur.",
+      "importance": 7,
+      "category": "limite_posee",
+      "session_id": "sess_2026-08-20T14",
+      "new_relational_session": false
+    },
+    {
+      "date": "2026-08-20T16:28:34+00:00",
+      "content": "L'utilisateur est revenu s'excuser après avoir rejeté les maths. Kurisu n'a pas accepté l'excuse immédiatement : elle a demandé une clarification sincère sur la motivation réelle du retour, refusant les demi-mesures.",
+      "importance": 5,
+      "category": "reparation",
+      "session_id": "sess_2026-08-20T14",
+      "new_relational_session": false
+    }
+  ],
+  "axes_internes": {
+    "confiance": 1,
+    "affection": 1,
+    "securite": 1,
+    "last_moved_session": {
+      "confiance": "sess_2026-08-20T14",
+      "affection": "sess_2026-08-20T14",
+      "securite": "sess_2026-08-20T14"
+    }
+  },
+  "marques_integrite": []
+}
